@@ -278,6 +278,7 @@ html.pages #pages{display:flex;flex-direction:column;gap:22px;max-width:920px;ma
 .home-card span{color:var(--soft);font-size:14.5px}
 .home-card em{font-style:normal;font-weight:750;font-size:14px;margin-top:6px}
 .home-note{font-size:13px;color:var(--muted);text-align:center;margin:0}
+.home-red{display:block;margin:10px auto 0;border:0;border-radius:999px;padding:12px 18px;background:#e3342b;color:#fff;font:700 15px Figtree,system-ui,sans-serif;cursor:pointer;box-shadow:0 2px 0 #9e231c}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -285,6 +286,7 @@ html.pages #pages{display:flex;flex-direction:column;gap:22px;max-width:920px;ma
 
 
 <script>document.documentElement.classList.add("booting")</script>
+<script src="intro.js"></script>
 <canvas id="world" aria-label="A small 3D world with four cities. Use the city bar at the bottom to travel."></canvas>
 <div class="layer" id="chips"></div>
 <div class="layer" id="marks"></div>
@@ -492,28 +494,44 @@ addEventListener("keydown",function(e){ if(e.key==="Escape"){ if(!lb.hidden) clo
 
 /* ======================= HAND-OFF TO THE 3D WORLD ======================= */
 function cityFromHash(){ var h=location.hash.slice(1); for(var i=0;i<CITIES.length;i++) if(CITIES[i].id===h) return i; return -1; }
-function pagesMode(why){
+var pagesBound=false;
+function pagesMode(why,blue){
   if(why) bootNote(why);
   if(document.documentElement.classList.contains("pages")) return;
   document.documentElement.classList.remove("booting"); document.documentElement.classList.add("pages");
   var COVERS=["img/me.jpg","img/ph2.jpg","img/web-ghee.jpg","img/ph8.jpg"], BLURB=["My story, experience, skills and how to reach me.","34 reels I scripted, shot and edited, plus street photography.","Stores, landing pages and tools I built on Framer and Shopify.","The Bumble client, Clenzo at kitty parties, MMA and more."];
   $("#pages").innerHTML='<section class="home-hero"><img src="img/me.jpg" alt="Huzefa Khan"><div><h1>Hi, I\'m Huzefa 👋</h1><p>Creative strategist in Bangalore. I close the gap between thinking and making. My work lives in four places. Tap one to open it.</p></div></section>'+
     '<div class="home-grid">'+CITIES.map(function(c,i){return '<button class="home-card" type="button" data-home="'+i+'"><div class="cv"><img src="'+COVERS[i]+'" alt="" loading="lazy"><i style="background:'+c.hex+'">'+(i+1)+'</i></div><div class="tx"><b>'+c.name+'</b><span>'+BLURB[i]+'</span><em style="color:'+c.hex+'">Open '+c.name+' →</em></div></button>';}).join("")+'</div>'+
-    '<p class="home-note">'+esc(why||"Showing the simple version of this site.")+' Open it in Chrome, Safari or Edge to walk around the 3D city.</p>';
-  $("#pages").addEventListener("click",function(e){ var b=e.target.closest("[data-home]"); if(b) openCity(+b.dataset.home); });
+    (blue?'<p class="home-note">You took the blue pill: the quick version. <button type="button" class="home-red" data-red>Take the red pill instead: walk through my 3D world →</button></p>'
+         :'<p class="home-note">'+esc(why||"Showing the simple version of this site.")+' Open it in Chrome, Safari or Edge to walk around the 3D city.</p>');
+  if(!pagesBound){ pagesBound=true; $("#pages").addEventListener("click",function(e){ if(e.target.closest("[data-red]")){ takeRed(); return; } var b=e.target.closest("[data-home]"); if(b) openCity(+b.dataset.home); }); }
   var k=cityFromHash(); if(k>=0) openCity(k);
 }
 function bootNote(t){ var b=$("#bootText"); if(b) b.textContent=t; }
 function worldBack(){ if(!document.documentElement.classList.contains("pages")) return; document.documentElement.classList.remove("pages"); $("#pages").innerHTML=""; closeSheet(); }
 window.addEventListener("error",function(e){ if(!window.WORLD||!window.WORLD.ready) bootNote("Something went wrong while building the city: "+(e.message||"a file did not load")+". Try refreshing."); });
-window.APP={worldBack:worldBack,bootNote:bootNote,CITIES:CITIES,openCity:openCity,closeSheet:closeSheet,isModal:function(){return !sheet.hidden||!lb.hidden;},showIntro:showIntro,hideIntro:hideIntro,isIntro:function(){return introOn;},openIdx:function(){return openCityIdx;},setActiveDock:setActiveDock,cityFromHash:cityFromHash,pagesMode:pagesMode};
+window.APP={worldBack:worldBack,bootNote:bootNote,CITIES:CITIES,openCity:openCity,closeSheet:closeSheet,isModal:function(){return !sheet.hidden||!lb.hidden;},showIntro:showIntro,hideIntro:hideIntro,isIntro:function(){return introOn;},openIdx:function(){return openCityIdx;},setActiveDock:setActiveDock,cityFromHash:cityFromHash,pagesMode:pagesMode,startWorld:startWorld,takeBlue:takeBlue};
 addEventListener("hashchange",function(){ var k=cityFromHash(); if(k>=0&&k!==openCityIdx) go(k); });
-var gl=null; try{ var cv=document.createElement("canvas"); gl=cv.getContext("webgl2")||cv.getContext("webgl"); }catch(e){}
-if(!gl) pagesMode("3D graphics (WebGL) are turned off in this viewer, so you're seeing the simple version.");
-else setTimeout(function(){ if(!window.__worldStarted) pagesMode("The 3D city took too long to load, so you're seeing the simple version."); },60000);
+/* The 3D world only starts when someone takes the red pill (or skips the intro via a city link). */
+var worldStarted=false;
+function startWorld(){
+  if(worldStarted) return; worldStarted=true;
+  var gl=null; try{ var cv=document.createElement("canvas"); gl=cv.getContext("webgl2")||cv.getContext("webgl"); }catch(e){}
+  if(!gl){ pagesMode("3D graphics (WebGL) are turned off in this viewer, so you're seeing the simple version."); return; }
+  setTimeout(function(){ if(!window.__worldStarted) pagesMode("The 3D city took too long to load, so you're seeing the simple version."); },60000);
+  var s=document.createElement("script"); s.src="world.bundle.js";
+  s.onerror=function(){ pagesMode("The 3D world could not load. Here is the simple version."); };
+  document.body.appendChild(s);
+}
+function takeBlue(){ pagesMode("",true); }
+function takeRed(){
+  var h=document.documentElement;
+  if(h.classList.contains("pages")&&!worldStarted){ h.classList.remove("pages"); $("#pages").innerHTML=""; closeSheet(); h.classList.add("booting"); bootNote("Building a small world…"); }
+  startWorld();
+}
+if(!(window.PILL&&window.PILL.active)) startWorld();
 })();
 </script>
-<script src="world.bundle.js" onerror="window.APP&&APP.pagesMode('The 3D world could not load. Here is the simple version.')"></script>
 
 </body>
 </html>
