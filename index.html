@@ -260,8 +260,24 @@ html.booting .top,html.booting .dock,html.booting .joy,html.booting .skate,html.
 #pages{display:none}
 html.pages body{overflow:auto}
 html.pages #world,html.pages .layer,html.pages .joy,html.pages .skate,html.pages .bc,html.pages #boot{display:none}
-html.pages #pages{display:grid;gap:12px;max-width:720px;margin:0 auto;padding:90px 16px 120px}
-#pages p{margin:0 0 4px;color:var(--soft)}
+html.pages #pages{display:flex;flex-direction:column;gap:22px;max-width:920px;margin:0 auto;padding-block:calc(env(safe-area-inset-top,0px) + 92px) calc(env(safe-area-inset-bottom,0px) + 120px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.home-hero{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;align-items:center;background:var(--paper);border-radius:26px;padding:20px;box-shadow:var(--pill-shadow),0 12px 36px rgba(58,40,24,.1)}
+.home-hero img{width:150px;aspect-ratio:1;object-fit:cover;border-radius:20px}
+.home-hero h1{margin:0 0 6px;font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.home-hero p{margin:0;color:var(--soft);font-size:16.5px;max-width:52ch}
+@media (max-width:560px){.home-hero{grid-template-columns:72px minmax(0,1fr);gap:14px;padding:14px}.home-hero img{width:72px;border-radius:16px}.home-hero h1{font-size:26px}.home-hero p{font-size:14.5px}}
+.home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:620px){.home-grid{grid-template-columns:1fr}}
+.home-card{display:flex;flex-direction:column;text-align:left;background:var(--paper);border-radius:22px;overflow:hidden;box-shadow:var(--pill-shadow),0 10px 30px rgba(58,40,24,.08);transition:transform .25s var(--ease)}
+.home-card:hover{transform:translateY(-3px)}
+.home-card .cv{height:150px;position:relative;overflow:hidden}
+.home-card .cv img{width:100%;height:100%;object-fit:cover;display:block}
+.home-card .cv i{position:absolute;left:14px;top:14px;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;font-style:normal;font-weight:800;box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.home-card .tx{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.home-card b{font-size:21px;font-weight:800;letter-spacing:-.02em}
+.home-card span{color:var(--soft);font-size:14.5px}
+.home-card em{font-style:normal;font-weight:750;font-size:14px;margin-top:6px}
+.home-note{font-size:13px;color:var(--muted);text-align:center;margin:0}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -480,8 +496,12 @@ function pagesMode(why){
   if(why) bootNote(why);
   if(document.documentElement.classList.contains("pages")) return;
   document.documentElement.classList.remove("booting"); document.documentElement.classList.add("pages");
-  $("#pages").innerHTML='<p>Pick a city to open it.</p>';
-  var k=cityFromHash(); openCity(k>=0?k:0);
+  var COVERS=["img/me.jpg","img/ph2.jpg","img/web-ghee.jpg","img/ph8.jpg"], BLURB=["My story, experience, skills and how to reach me.","34 reels I scripted, shot and edited, plus street photography.","Stores, landing pages and tools I built on Framer and Shopify.","The Bumble client, Clenzo at kitty parties, MMA and more."];
+  $("#pages").innerHTML='<section class="home-hero"><img src="img/me.jpg" alt="Huzefa Khan"><div><h1>Hi, I\'m Huzefa 👋</h1><p>Creative strategist in Bangalore. I close the gap between thinking and making. My work lives in four places. Tap one to open it.</p></div></section>'+
+    '<div class="home-grid">'+CITIES.map(function(c,i){return '<button class="home-card" type="button" data-home="'+i+'"><div class="cv"><img src="'+COVERS[i]+'" alt="" loading="lazy"><i style="background:'+c.hex+'">'+(i+1)+'</i></div><div class="tx"><b>'+c.name+'</b><span>'+BLURB[i]+'</span><em style="color:'+c.hex+'">Open '+c.name+' →</em></div></button>';}).join("")+'</div>'+
+    '<p class="home-note">'+esc(why||"Showing the simple version of this site.")+' Open it in Chrome, Safari or Edge to walk around the 3D city.</p>';
+  $("#pages").addEventListener("click",function(e){ var b=e.target.closest("[data-home]"); if(b) openCity(+b.dataset.home); });
+  var k=cityFromHash(); if(k>=0) openCity(k);
 }
 function bootNote(t){ var b=$("#bootText"); if(b) b.textContent=t; }
 function worldBack(){ if(!document.documentElement.classList.contains("pages")) return; document.documentElement.classList.remove("pages"); $("#pages").innerHTML=""; closeSheet(); }
@@ -489,8 +509,8 @@ window.addEventListener("error",function(e){ if(!window.WORLD||!window.WORLD.rea
 window.APP={worldBack:worldBack,bootNote:bootNote,CITIES:CITIES,openCity:openCity,closeSheet:closeSheet,isModal:function(){return !sheet.hidden||!lb.hidden;},showIntro:showIntro,hideIntro:hideIntro,isIntro:function(){return introOn;},openIdx:function(){return openCityIdx;},setActiveDock:setActiveDock,cityFromHash:cityFromHash,pagesMode:pagesMode};
 addEventListener("hashchange",function(){ var k=cityFromHash(); if(k>=0&&k!==openCityIdx) go(k); });
 var gl=null; try{ var cv=document.createElement("canvas"); gl=cv.getContext("webgl2")||cv.getContext("webgl"); }catch(e){}
-if(!gl) pagesMode("This browser can't show 3D, so here is the simple version.");
-else setTimeout(function(){ if(!window.__worldStarted) pagesMode(); },60000);
+if(!gl) pagesMode("3D graphics (WebGL) are turned off in this viewer, so you're seeing the simple version.");
+else setTimeout(function(){ if(!window.__worldStarted) pagesMode("The 3D city took too long to load, so you're seeing the simple version."); },60000);
 })();
 </script>
 <script src="world.bundle.js" onerror="window.APP&&APP.pagesMode('The 3D world could not load. Here is the simple version.')"></script>
