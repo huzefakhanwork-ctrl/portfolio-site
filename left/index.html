@@ -241,21 +241,13 @@ img{max-width:100%;display:block}
     </aside>
   </div>
 
+  <!-- brands -->
+  <div class="sect" id="brandlist"><h2>Seen With</h2><span>Brands he has worked with</span></div>
+  <div class="logos" id="logos"></div>
+
   <!-- case studies -->
   <div class="sect" id="business"><h2>Business</h2><span>Six decisions, written down · Problem, approach, result</span></div>
   <div class="articles" id="articles"></div>
-
-  <!-- market report -->
-  <div class="sect" id="market"><h2>Market Report</h2><span>The work, counted</span></div>
-  <div class="market">
-    <div class="mk">
-      <h4>Reels: the closing figures</h4>
-      <p class="sub">Brand films and reels he scripted, shot and edited.</p>
-      <div class="board" id="board"></div>
-      <div id="roles"></div>
-    </div>
-    <div class="mk" id="brands"></div>
-  </div>
 
   <!-- websites -->
   <div class="sect" id="listings"><h2>Listings</h2><span>Six websites · Framer &amp; Shopify</span></div>
@@ -268,10 +260,6 @@ img{max-width:100%;display:block}
   <!-- skills + tools -->
   <div class="sect" id="classifieds"><h2>Classifieds</h2><span>Skills for hire · Tools of the trade</span></div>
   <div class="classifieds" id="ads"></div>
-
-  <!-- brands -->
-  <div class="sect" id="brandlist"><h2>Seen With</h2><span>Brands he has worked with</span></div>
-  <div class="logos" id="logos"></div>
 
   <!-- back page -->
   <div class="back" id="contact">
@@ -290,7 +278,6 @@ img{max-width:100%;display:block}
   <div class="colophon"><span>The Left Brain Ledger · Vol. I</span><span>Printed in Bangalore</span><span>© Huzefa Khan</span></div>
 </div>
 
-<div class="tip" id="tip" role="tooltip"></div>
 
 <script>
 (function () {
@@ -330,8 +317,6 @@ img{max-width:100%;display:block}
       result: "A few months later he bought the laptop himself, with his own money.", lesson: "People rarely buy the best product. They buy the product they trust.", figs: [] }
   ];
 
-  var VIDEOS = [["Mumbai Pav Co","Shot · Edited"],["Mumbai Pav Co","Shot · Edited"],["Rummy Time","Shot · Edited"],["Coca-Cola","Shot · Edited"],["Solo","Shot · Edited"],["Bangalore Creator Fest","Scripted · Shot · Edited"],["10XER","Shot · Edited"],["Snap Sync","Shot · Edited"],["Medfeet","Scripted · Shot · Edited"],["Medial","Scripted · Edited"],["Medial","Shot · Edited"],["Chai Days","Scripted · Shot · Edited"],["Mumbai Pav Co","Shot · Edited"],["Red Bull","Shot · Edited"],["Phurr","Shot · Edited"],["10XER","Shot · Edited"],["NotFunny","Scripted · Shot · Edited"],["10XER","Shot · Edited"],["Mentor My Board","Shot · Edited"],["Rummy Time","Shot · Edited"],["Goats","Scripted · Edited"],["Goats","Scripted · Edited"],["Solo","Scripted · Shot · Edited"],["Mumbai Pav Co","Shot · Edited"],["Red Bull","Shot · Edited"],["Goats","Scripted · Shot · Edited"],["Dil Foods","Shot · Edited"],["Goats","Scripted · Shot · Edited"],["Phurr","Scripted · Shot · Edited"],["10XER","Shot · Edited"],["Medfeet","Scripted · Shot · Edited"],["Murshmellow","Scripted · Shot · Edited"],["Medial","Scripted · Edited"],["Phurr","Scripted · Shot · Edited"]];
-
   var SITES = [["A2 Bilona Ghee","An e-commerce storefront for a traditional ghee brand: hero, product story and a straight path to checkout.",["E-commerce","Shopify"]],["Activewear for real Indian bodies","A clothing store built around fit and real bodies, with bold imagery and quick collection browsing.",["E-commerce","Landing page"]],["Kiwi Cashback Calculator","An interactive tool page that shows people how much cashback they could earn, built to convert.",["Tool","Framer"]],["Your Professional Address","A landing page for a virtual-office service, explaining the offer in one scroll.",["Landing page","Framer"]],["Marketing agency site","A clean, minimal agency site that leads with positioning and a single call to action.",["Agency","Framer"]],["The Elements of Style","A design concept for a clothing brand. Not a client project.",["Concept","Framer"]]];
 
   var EXP = [["2025–26","3BHK Marketing Agency","Founder","Built a strategy-first marketing agency: brand strategy, campaigns, content systems and business consulting.","Great marketing isn't about making more content. It's about solving the right business problem."],
@@ -363,7 +348,7 @@ img{max-width:100%;display:block}
   var tickHTML = TICK.map(function (t) { return '<span><b>' + t[0] + '</b> ' + t[1] + ' <i>▲</i></span>'; }).join("");
   $("tick").innerHTML = tickHTML + tickHTML;
 
-  var SECS = [["business", "Business", "6 stories"], ["market", "Market Report", "34 reels"], ["listings", "Listings", "6 sites"], ["archive", "The Archive", "2021–now"], ["classifieds", "Classifieds", "8 skills"], ["brandlist", "Seen With", "12 brands"], ["contact", "Letters", "Contact"]];
+  var SECS = [["brandlist", "Seen With", "12 brands"], ["business", "Business", "6 stories"], ["listings", "Listings", "6 sites"], ["archive", "The Archive", "2021–now"], ["classifieds", "Classifieds", "8 skills"], ["contact", "Letters", "Contact"]];
   $("index").innerHTML = SECS.map(function (s) { return '<li><a href="#' + s[0] + '">' + s[1] + '<span>' + s[2] + '</span></a></li>'; }).join("");
 
   $("articles").innerHTML = CASES.map(function (c) {
@@ -375,35 +360,12 @@ img{max-width:100%;display:block}
       (c.link ? '<a class="more" href="' + c.link[1] + '" target="_blank" rel="noopener">' + esc(c.link[0]) + '</a>' : "") + '</article>';
   }).join("");
 
-  // market report: computed from the reel list
-  var total = VIDEOS.length, byBrand = {}, roles = { Scripted: 0, Shot: 0, Edited: 0 };
-  VIDEOS.forEach(function (v) { byBrand[v[0]] = (byBrand[v[0]] || 0) + 1; v[1].split(" · ").forEach(function (r) { if (roles[r] !== undefined) roles[r]++; }); });
-  var brands = Object.keys(byBrand).map(function (b) { return [b, byBrand[b]]; }).sort(function (a, b) { return b[1] - a[1] || a[0].localeCompare(b[0]); });
-  var allThree = VIDEOS.filter(function (v) { return v[1] === "Scripted · Shot · Edited"; }).length;
-  $("board").innerHTML = [[total, "Reels"], [brands.length, "Brands & creators"], [allThree, "Made end to end"]].map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join("");
-  function rows(list, max, tipFn) {
-    return '<ul class="rows">' + list.map(function (r) {
-      return '<li class="row" tabindex="0" data-tip="' + esc(tipFn(r)) + '" aria-label="' + esc(tipFn(r)) + '"><span class="nm">' + esc(r[0]) + '</span><span class="bar"><i style="width:' + Math.max(2, Math.round(r[1] / max * 100)) + '%"></i></span><span class="val">' + r[1] + '</span></li>';
-    }).join("") + '</ul>';
-  }
-  $("roles").innerHTML = '<h4>What he did on each reel</h4><p class="sub">Out of ' + total + ' reels. A reel can count in more than one row.</p>' +
-    rows([["Edited", roles.Edited], ["Shot", roles.Shot], ["Scripted", roles.Scripted]], total, function (r) { return r[0] + ": " + r[1] + " of " + total + " (" + Math.round(r[1] / total * 100) + "%)"; });
-  $("brands").innerHTML = '<h4>Reels per brand</h4><p class="sub">' + brands.length + ' brands and creators, most reels first.</p>' +
-    rows(brands, brands[0][1], function (r) { return r[0] + ": " + r[1] + (r[1] === 1 ? " reel" : " reels") + " (" + Math.round(r[1] / total * 100) + "% of " + total + ")"; });
-
   $("sites").tBodies[0].innerHTML = SITES.map(function (s) { return '<tr><td><h5>' + esc(s[0]) + '</h5></td><td>' + esc(s[1]) + '</td><td>' + s[2].map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</td></tr>'; }).join("");
   $("exp").tBodies[0].innerHTML = EXP.map(function (e) { return '<tr><td class="yr">' + esc(e[0]) + '</td><td><h5>' + esc(e[1]) + '</h5><div class="role">' + esc(e[2]) + '</div>' + esc(e[3]) + '</td><td class="q">' + esc(e[4]) + '</td></tr>'; }).join("");
   $("ads").innerHTML = SKILLS.map(function (s) { return '<div class="ad"><h5>' + esc(s[0]) + '</h5><p>' + esc(s[1]) + '</p>' + s[2].map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</div>'; }).join("") +
     '<div class="ad tools"><h5>Tools of the trade</h5><ul>' + TOOLS.map(function (t) { return '<li><span>' + esc(t[1]) + '</span><em>' + esc(t[0]) + '</em></li>'; }).join("") + '</ul></div>';
   $("logos").innerHTML = LOGOS.map(function (l) { return '<div><img src="../img/lg-' + l[0] + '.png" alt="' + esc(l[1]) + '" loading="lazy"></div>'; }).join("");
 
-  /* hover tooltip for the bars */
-  var tip = $("tip");
-  function show(el, x, y) { tip.textContent = el.getAttribute("data-tip"); tip.classList.add("on"); var w = tip.offsetWidth; tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, x - w / 2)) + "px"; tip.style.top = Math.max(8, y - 40) + "px"; }
-  document.addEventListener("mousemove", function (e) { var r = e.target.closest && e.target.closest(".row"); if (r) show(r, e.clientX, e.clientY); else tip.classList.remove("on"); });
-  document.addEventListener("focusin", function (e) { var r = e.target.closest && e.target.closest(".row"); if (r) { var b = r.getBoundingClientRect(); show(r, b.left + b.width / 2, b.top); } });
-  document.addEventListener("focusout", function () { tip.classList.remove("on"); });
-  addEventListener("scroll", function () { tip.classList.remove("on"); }, { passive: true });
 })();
 </script>
 </body>
