@@ -31,6 +31,9 @@
     "#pill.scene{background:radial-gradient(120% 90% at 50% 40%," + PAPER_IN + " 0%," + PAPER_OUT + " 100%)}",
     "#pill.gone{display:none}",
     "#pill video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}",
+    // Landscape screens: fill the whole screen (trims a little top/bottom or sides).
+    // Portrait phones keep the full frame so the captions are never cut off.
+    "@media (min-aspect-ratio:4/3){#pill video{object-fit:cover}}",
     "#pill canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}",
     "#pill .p-ui{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s ease}",
     "#pill .p-ui.on{opacity:1}",
@@ -267,6 +270,7 @@
     skipBtn.hidden = sndBtn.hidden = playBtn.hidden = true;
     form(function () {
       stage = "choose"; ui.classList.add("on"); idleOn = true; idle();
+      if (innerWidth !== W || innerHeight !== H) { size(); layout(); drawStill(); } // resized while forming
       setTimeout(function () { try { $("pDotR").focus({ preventScroll: true }); } catch (e) {} }, 50);
     });
   }
