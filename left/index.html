@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Huzefa Khan · The Left Brain</title>
+<meta name="description" content="Huzefa Khan, creative strategist in Bangalore: case studies, output data, timeline and skills. The analytical version of the portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#fbf7f0; --paper-2:#f3ece1; --ink:#1f1b17; --soft:#5f564c; --muted:#8a7f72; --rule:#e2d9cb;
+  --accent:#b8432f; --accent-soft:#f6e3dd; --track:#ece4d7; --pill-red:#e3342b; --pill-blue:#2f7fe6;
+  --serif:'Instrument Serif',Georgia,serif; --sans:Figtree,system-ui,-apple-system,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans)}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:780px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:5;background:rgba(251,247,240,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:54px;max-width:1120px}
+.bar a{text-decoration:none;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);display:inline-flex;align-items:center;gap:8px;padding:8px 0}
+.bar a:hover{color:var(--ink)}
+.pilldot{width:18px;height:9px;border-radius:5px;display:inline-block;box-shadow:inset 0 2px 0 rgba(255,255,255,.45)}
+
+/* title block */
+header.title{padding:72px 0 40px;border-bottom:1px solid var(--rule)}
+.kick{font:500 12px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+h1{font:400 clamp(44px,8vw,78px)/.98 var(--serif);letter-spacing:-.015em;margin:16px 0 18px}
+h1 em{color:var(--accent)}
+.dek{font-size:20px;line-height:1.5;color:var(--soft);max-width:36ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;font:400 12.5px var(--mono);color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+
+/* KPI row */
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin:36px 0 0}
+.kpi{background:var(--paper);padding:18px 18px 16px}
+.kpi b{display:block;font:400 44px/1 var(--serif);letter-spacing:-.01em}
+.kpi span{display:block;margin-top:8px;font-size:13.5px;color:var(--soft);line-height:1.35}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi b{font-size:38px}}
+
+/* sections */
+section.sec{padding:64px 0 8px;scroll-margin-top:70px}
+.secno{font:500 12px var(--mono);letter-spacing:.14em;color:var(--accent);text-transform:uppercase}
+h2{font:400 clamp(32px,5vw,44px)/1.05 var(--serif);letter-spacing:-.01em;margin:8px 0 14px}
+h3{font:700 19px/1.3 var(--sans);margin:0}
+p{margin:0 0 14px}
+.lead{font-size:19px;color:var(--soft)}
+.small{font-size:14px;color:var(--muted)}
+
+/* table of contents */
+.toc{margin:40px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:18px;align-items:baseline;padding:12px 2px;text-decoration:none}
+.toc a:hover b{color:var(--accent)}
+.toc i{font:500 12px var(--mono);color:var(--muted);font-style:normal;min-width:26px}
+.toc b{font-weight:600}
+.toc span{margin-left:auto;font-size:14px;color:var(--muted);text-align:right}
+@media (max-width:560px){.toc span{display:none}}
+
+/* method */
+.method{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:22px 0 6px;counter-reset:m}
+.method div{background:var(--paper-2);border-radius:12px;padding:14px 14px 12px}
+.method i{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-style:normal}
+.method b{display:block;font-size:16px;margin:4px 0 2px}
+.method span{font-size:13.5px;color:var(--soft);line-height:1.4;display:block}
+@media (max-width:640px){.method{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* case studies */
+.case{border-top:2px solid var(--ink);padding:22px 0 26px;margin-top:30px}
+.case-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:16px}
+.case-head .n{font:500 12px var(--mono);color:var(--accent)}
+.case-head h3{font:400 30px/1.1 var(--serif);letter-spacing:-.01em}
+.case-head .when{font:400 12.5px var(--mono);color:var(--muted);margin-left:auto}
+.par{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 22px;margin:0}
+.par dt{font:500 11.5px/2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.par dd{margin:0 0 12px}
+.par dd.res{font-weight:600}
+.par dt.lsn + dd{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.35;color:var(--ink)}
+@media (max-width:560px){.par{grid-template-columns:1fr}.par dt{padding-top:0}.par dd{margin-bottom:14px}}
+.figs{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 14px}
+.fig{background:var(--accent-soft);border-radius:12px;padding:12px 16px;min-width:150px}
+.fig b{display:block;font:400 34px/1 var(--serif);color:var(--accent)}
+.fig span{display:block;font-size:13px;color:var(--soft);margin-top:6px;line-height:1.35}
+.case a.out{font-size:15px;font-weight:600;color:var(--accent);text-decoration:none}
+.case a.out:hover{text-decoration:underline}
+
+/* charts: meter list + ranked bars, one hue */
+.chart{margin:22px 0 10px}
+.chart h4{font:600 15px var(--sans);margin:0 0 2px}
+.chart .sub{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+.rows{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:170px minmax(0,1fr) 64px;align-items:center;gap:14px;padding:5px 0;position:relative;cursor:default}
+.row .nm{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .val{font:500 13px var(--mono);text-align:right;color:var(--ink)}
+.track{height:10px;background:var(--track);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:0 4px 4px 0}
+.row:hover .nm,.row:focus .nm{color:var(--accent)}
+.row:hover .fill,.row:focus .fill{filter:brightness(.88)}
+.row:focus{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr) 52px;gap:4px 10px}.row .track{grid-column:1 / -1;grid-row:2}}
+.tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:#fff;font:500 13px var(--sans);padding:8px 11px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .12s ease;white-space:nowrap}
+.tip.on{opacity:1}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;margin:18px 0 8px;font-size:15px}
+.tbl th{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--ink)}
+.tbl td{padding:14px 12px 14px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl td:first-child{white-space:nowrap}
+.tbl .mono{font:400 13px var(--mono);color:var(--soft)}
+.tbl .q{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--soft)}
+.tag{display:inline-block;font:500 11.5px var(--mono);color:var(--soft);background:var(--paper-2);border-radius:6px;padding:3px 7px;margin:0 4px 4px 0}
+@media (max-width:640px){
+  .tbl.stack thead{display:none}
+  .tbl.stack tr{display:block;border-bottom:1px solid var(--rule);padding:12px 0}
+  .tbl.stack td{display:block;border:0;padding:2px 0}
+  .tbl.stack td:first-child{white-space:normal}
+}
+
+/* brands */
+.logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:20px 0 0}
+.logos div{background:#fff;border:1px solid var(--rule);border-radius:12px;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:12px}
+.logos img{max-height:100%;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .2s,opacity .2s}
+.logos div:hover img{filter:none;opacity:1}
+@media (max-width:640px){.logos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* conclusion */
+.concl{margin:70px 0 0;background:var(--ink);color:#f6f1e8;border-radius:22px;padding:40px clamp(22px,5vw,48px)}
+.concl .secno{color:#e9a27f}
+.concl h2{color:#fff}
+.concl p{color:#d9d1c4}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;border-radius:999px;padding:13px 20px;font:700 15px var(--sans)}
+.btn.light{background:#fbf7f0;color:var(--ink)}
+.btn.ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
+.btn:hover{filter:brightness(1.05)}
+footer{padding:36px 0 60px;font:400 12.5px var(--mono);color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+/* side contents on wide screens */
+@media (min-width:1180px){
+  .side{position:fixed;top:110px;left:calc(50% - 390px - 230px);width:190px;font-size:13.5px}
+  .side b{display:block;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .side a{display:block;text-decoration:none;color:var(--muted);padding:5px 0 5px 12px;border-left:2px solid var(--rule)}
+  .side a.on{color:var(--ink);border-left-color:var(--accent)}
+}
+@media (max-width:1179px){.side{display:none}}
+@media print{.bar,.side,.tip{display:none}.concl{background:none;color:var(--ink);border:1px solid var(--ink)}.concl h2,.concl p{color:var(--ink)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="bar" aria-label="Pages">
+  <div class="wrap">
+    <a href="../">← Back to the pills</a>
+    <a href="../#origin">Take the blue pill <span class="pilldot" style="background:var(--pill-blue)"></span></a>
+  </div>
+</nav>
+
+<aside class="side" aria-label="Contents" id="side"></aside>
+
+<main class="wrap" id="doc">
+  <header class="title">
+    <div class="kick"><span class="pilldot" style="background:var(--pill-red)"></span>The red pill · Left brain</div>
+    <h1>Huzefa Khan, <em>explained.</em></h1>
+    <p class="dek">Analysis, logic and structure: my work as case studies, data and a straight timeline.</p>
+    <div class="meta"><span><b>Creative strategist</b></span><span>Bangalore, India</span><span>Open to work worldwide</span></div>
+    <div class="kpis" id="kpis"></div>
+    <ol class="toc" id="toc"></ol>
+  </header>
+
+  <section class="sec" id="method">
+    <div class="secno">01 · Method</div>
+    <h2>Every project starts as a question.</h2>
+    <p class="lead">Why do sponsors say yes? Why does a video actually get watched? Why do small businesses avoid marketing until it's too late? The fastest way to an answer has always been to go and do the thing. Each case below is written the same way.</p>
+    <div class="method">
+      <div><i>Step 1</i><b>Problem</b><span>What wasn't working, in one honest line.</span></div>
+      <div><i>Step 2</i><b>Approach</b><span>The decision I made, and why.</span></div>
+      <div><i>Step 3</i><b>Result</b><span>What actually happened.</span></div>
+      <div><i>Step 4</i><b>Lesson</b><span>The rule I kept.</span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="cases">
+    <div class="secno">02 · Case studies</div>
+    <h2>Six decisions, written down.</h2>
+    <p class="lead">From a floor cleaner to two agencies. Ordered newest first.</p>
+    <div id="caseList"></div>
+  </section>
+
+  <section class="sec" id="output">
+    <div class="secno">03 · Output</div>
+    <h2>The work, counted.</h2>
+    <p class="lead">Brand films and reels I scripted, shot and edited, and the websites I designed and built.</p>
+    <div class="kpis" id="reelKpis" style="margin-top:22px"></div>
+    <div class="chart" id="roleChart"></div>
+    <div class="chart" id="brandChart"></div>
+    <h3 style="margin-top:34px">Websites</h3>
+    <table class="tbl stack" id="sitesTbl"><thead><tr><th>Project</th><th>What it does</th><th>Type</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section class="sec" id="timeline">
+    <div class="secno">04 · Timeline</div>
+    <h2>The road so far.</h2>
+    <table class="tbl stack" id="expTbl"><thead><tr><th>When</th><th>What</th><th>What I learned</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="secno">05 · Skills</div>
+    <h2>A strategist who gets his hands dirty.</h2>
+    <table class="tbl stack" id="skillTbl"><thead><tr><th>Skill</th><th>In one line</th><th>Includes</th></tr></thead><tbody></tbody></table>
+    <h3 style="margin-top:30px">Tools</h3>
+    <table class="tbl" id="toolTbl"><thead><tr><th>For</th><th>Tool</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section class="sec" id="brands">
+    <div class="secno">06 · Brands</div>
+    <h2>Brands I've worked with.</h2>
+    <div class="logos" id="logos"></div>
+  </section>
+
+  <section class="concl" id="contact">
+    <div class="secno">07 · Conclusion</div>
+    <h2>Let's create something people actually pay attention to.</h2>
+    <p>Open to brand strategy, content and agency work, in Bangalore or anywhere. If you'd rather feel it than read it, the blue pill is a small 3D world of the same story.</p>
+    <div class="btns">
+      <a class="btn light" id="liBtn" target="_blank" rel="noopener">Message me on LinkedIn ↗</a>
+      <a class="btn ghost" href="../#origin"><span class="pilldot" style="background:var(--pill-blue)"></span>Take the blue pill</a>
+    </div>
+  </section>
+
+  <footer><span>Huzefa Khan · The left brain</span><span>The right brain lives in the 3D city.</span></footer>
+</main>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+(function () {
+  "use strict";
+  /* ============================ DATA ============================
+     Same facts as the main site (index.html). Numbers for a case go in
+     `figs` as ["value", "what it measures"]; an empty list shows nothing. */
+  var LINKEDIN = "https://www.linkedin.com/in/huzefa-khan-135285325";
+  var BUMBLE = "https://www.linkedin.com/posts/huzefa-khan-135285325_i-almost-lost-a-dream-client-because-of-a-activity-7434817491140444160-XE_v";
+
+  var KPIS = [["40+", "Brands worked with"], ["60+", "Projects delivered"], ["1.5+", "Years running agencies"], ["34", "Reels scripted, shot or edited"], ["6", "Websites built"], ["99%", "On-time delivery"]];
+
+  var CASES = [
+    { name: "3BHK Marketing Agency", when: "Aug 2025 – Jul 2026 · Founder",
+      problem: "Small businesses avoid marketing until it's too late, and when they start, they make more content instead of fixing the real problem.",
+      approach: "Built a strategy-first marketing agency: brand strategy and positioning first, then campaigns, content systems and business consulting.",
+      result: "",
+      lesson: "Great marketing isn't about making more content. It's about solving the right business problem.",
+      figs: [] },
+    { name: "Surreal Factory", when: "2024 – 2025 · Co-founder",
+      problem: "Most brand videos don't get watched. The question was why some do.",
+      approach: "Built a full-service video production agency that owns the whole chain: scripting and creative direction, shooting, editing and client management.",
+      result: "",
+      lesson: "Great videos don't start with cameras. They start with great ideas.",
+      figs: [] },
+    { name: "The Bumble pitch", when: "Client win",
+      problem: "I misspelled a client's name in an email. Not a small typo. They were annoyed and roasted me in one line: “send us anything, Tinder, Bumble, whatever.”",
+      approach: "Instead of a quick “sorry, typo,” I took the joke literally and made them a Bumble profile.",
+      result: "It ended with them signing on.",
+      lesson: "",
+      figs: [], link: ["Read the full story on LinkedIn ↗", BUMBLE] },
+    { name: "Clenzo", when: "2023 · Founder, eco-friendly floor cleaner",
+      problem: "We went the “proper” way: Amazon, a few distributors, a few retail shops. It worked, kind of. We were still sitting on 20–25 litres nobody wanted.",
+      approach: "Asked a better question: who actually cares if their floor is clean? Aunties, at kitty parties. We pitched it as “your kid eats off this floor, your dog licks this floor.”",
+      result: "Sold out the remaining stock in one sitting.",
+      lesson: "The fanciest channel isn't always the right one.",
+      figs: [["20–25 L", "Unsold stock cleared in one sitting"]] },
+    { name: "College leadership", when: "2021 – 2024 · Core organizing team",
+      problem: "Day one of college, I decided I didn't belong.",
+      approach: "Said yes to everything for three years: bringing in sponsorships, managing 80+ students, organising large events, and the vendors nobody else wanted to deal with.",
+      result: "Most Valuable Asset of the Year from the college, and Best Leader from the juniors.",
+      lesson: "Leadership isn't about leading people. It's about creating clarity.",
+      figs: [["80+", "Students led"], ["2", "Awards"]] },
+    { name: "Croma", when: "2022 – 2023 · Part-time sales executive",
+      problem: "I asked my dad for a gaming laptop. He said, “Focus on your studies.”",
+      approach: "Took a part-time job on the Croma retail floor while studying, helping customers choose laptops and tech that matched their needs.",
+      result: "A few months later I bought the laptop myself, with my own money.",
+      lesson: "People rarely buy the best product. They buy the product they trust.",
+      figs: [] }
+  ];
+
+  var VIDEOS = [["Mumbai Pav Co","Shot · Edited"],["Mumbai Pav Co","Shot · Edited"],["Rummy Time","Shot · Edited"],["Coca-Cola","Shot · Edited"],["Solo","Shot · Edited"],["Bangalore Creator Fest","Scripted · Shot · Edited"],["10XER","Shot · Edited"],["Snap Sync","Shot · Edited"],["Medfeet","Scripted · Shot · Edited"],["Medial","Scripted · Edited"],["Medial","Shot · Edited"],["Chai Days","Scripted · Shot · Edited"],["Mumbai Pav Co","Shot · Edited"],["Red Bull","Shot · Edited"],["Phurr","Shot · Edited"],["10XER","Shot · Edited"],["NotFunny","Scripted · Shot · Edited"],["10XER","Shot · Edited"],["Mentor My Board","Shot · Edited"],["Rummy Time","Shot · Edited"],["Goats","Scripted · Edited"],["Goats","Scripted · Edited"],["Solo","Scripted · Shot · Edited"],["Mumbai Pav Co","Shot · Edited"],["Red Bull","Shot · Edited"],["Goats","Scripted · Shot · Edited"],["Dil Foods","Shot · Edited"],["Goats","Scripted · Shot · Edited"],["Phurr","Scripted · Shot · Edited"],["10XER","Shot · Edited"],["Medfeet","Scripted · Shot · Edited"],["Murshmellow","Scripted · Shot · Edited"],["Medial","Scripted · Edited"],["Phurr","Scripted · Shot · Edited"]];
+
+  var SITES = [["A2 Bilona Ghee","An e-commerce storefront for a traditional ghee brand: hero, product story and a straight path to checkout.",["E-commerce","Shopify"]],["Activewear for real Indian bodies","A clothing store built around fit and real bodies, with bold imagery and quick collection browsing.",["E-commerce","Landing page"]],["Kiwi Cashback Calculator","An interactive tool page that shows people how much cashback they could earn, built to convert.",["Tool","Framer"]],["Your Professional Address","A landing page for a virtual-office service, explaining the offer in one scroll.",["Landing page","Framer"]],["Marketing agency site","A clean, minimal agency site that leads with positioning and a single call to action.",["Agency","Framer"]],["The Elements of Style","A design concept for a clothing brand. Not a client project.",["Concept","Framer"]]];
+
+  var EXP = [["2025–26","3BHK Marketing Agency","Founder","Built a strategy-first marketing agency: brand strategy, campaigns, content systems and business consulting.","Great marketing isn't about making more content. It's about solving the right business problem."],
+    ["2024–26","LIT School","Creator & Entrepreneurship Program","Two years learning how modern businesses are built: content, performance marketing, branding, web, UX, finance, HR and strategy, hands-on.","Marketing becomes far more powerful when you understand every function of a business."],
+    ["2024–25","Surreal Factory","Co-founder · Video production","A full-service video agency: scripting, creative direction, shooting, editing and client management.","Great videos don't start with cameras. They start with great ideas."],
+    ["2023","Clenzo","Founder · Eco-friendly cleaning brand","Launched a floor cleaner brand, from product sourcing and branding to sales and distribution.","Building a product is hard. Getting it into people's hands is even harder."],
+    ["2022–23","Croma","Sales executive · Part-time","Helped customers choose laptops and technology on the retail floor while studying.","People rarely buy the best product. They buy the product they trust."],
+    ["2021–24","College Leadership","Core organizing team","Led 80+ students, managed sponsorships, organised large events, represented the college at competitions.","Leadership isn't about leading people. It's about creating clarity."],
+    ["2021–now","Stock Market","Self-learner","Started exploring markets before turning 18, out of curiosity about decisions, risk and behaviour.","Markets reward discipline more than emotion."]];
+
+  var SKILLS = [["Brand Strategy","Turn scattered ideas into a brand people recognise, remember and trust.",["Positioning","Consumer Research","Messaging"]],["Content Production","Ideas deserve great execution.",["Script Writing","Storyboarding","Creative Direction"]],["Video Production","From scripting and shooting to editing, frame by frame.",["Shoot","Edit","Premiere Pro","CapCut"]],["Presentation Design","Presentations that simplify complex ideas and keep people engaged.",["Pitch Decks","Visual Storytelling","Canva"]],["No-Code Websites","Fast, modern websites without traditional code.",["Framer","Shopify","Landing Pages","SEO"]],["AI & Productivity","AI to speed up research and automate repetitive work.",["Claude","Perplexity","Notion AI"]],["Performance Marketing","Turning clicks into customers, not just numbers.",["Meta Ads","Google Ads","Targeting"]],["Creative Branding","Full-spectrum brand experiences from naming to launch.",["Naming","Identity","Launch"]]];
+  var TOOLS = [["Web design","Framer"],["E-commerce","Shopify"],["Design","Figma"],["Performance","Meta Ads"],["Search","Google Ads"],["Video","Premiere Pro"],["Short-form","CapCut"],["Creative","Canva"],["Second brain","Notion"],["Research","AI tools"]];
+  var LOGOS = [["kiwi","Kiwi"],["shopsy","Shopsy by Flipkart"],["dil","Dil Foods"],["kommune","Kommune India"],["bts","Bengaluru Tech Summit"],["superyou","SuperYou"],["goat","Goat Life"],["phurr","Phurr"],["notfunny","NotFunny"],["maana","Maana Health"],["lotto","Lotto"],["coto","Cotopay"]];
+
+  /* ============================ RENDER ============================ */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+  function kpiHTML(list) { return list.map(function (k) { return '<div class="kpi"><b>' + esc(k[0]) + '</b><span>' + esc(k[1]) + '</span></div>'; }).join(""); }
+
+  $("kpis").innerHTML = kpiHTML(KPIS);
+  $("liBtn").href = LINKEDIN;
+
+  var SECS = [["method", "Method", "How each case is written"], ["cases", "Case studies", "Six decisions"], ["output", "Output", "Reels and websites, counted"], ["timeline", "Timeline", "2021 to now"], ["skills", "Skills", "Eight skills, ten tools"], ["brands", "Brands", "Who I've worked with"], ["contact", "Conclusion", "Get in touch"]];
+  $("toc").innerHTML = SECS.map(function (s, i) { return '<li><a href="#' + s[0] + '"><i>0' + (i + 1) + '</i><b>' + s[1] + '</b><span>' + s[2] + '</span></a></li>'; }).join("");
+  $("side").innerHTML = "<b>Contents</b>" + SECS.map(function (s, i) { return '<a href="#' + s[0] + '" data-sec="' + s[0] + '">0' + (i + 1) + " " + s[1] + "</a>"; }).join("");
+
+  $("caseList").innerHTML = CASES.map(function (c, i) {
+    var rows = [["Problem", c.problem], ["Approach", c.approach], ["Result", c.result], ["Lesson", c.lesson]].filter(function (r) { return r[1]; });
+    return '<article class="case"><div class="case-head"><span class="n">2.' + (i + 1) + '</span><h3>' + esc(c.name) + '</h3><span class="when">' + esc(c.when) + '</span></div>' +
+      (c.figs.length ? '<div class="figs">' + c.figs.map(function (f) { return '<div class="fig"><b>' + esc(f[0]) + '</b><span>' + esc(f[1]) + '</span></div>'; }).join("") + '</div>' : "") +
+      '<dl class="par">' + rows.map(function (r) { return '<dt' + (r[0] === "Lesson" ? ' class="lsn"' : "") + '>' + r[0] + '</dt><dd' + (r[0] === "Result" ? ' class="res"' : "") + '>' + esc(r[1]) + '</dd>'; }).join("") + '</dl>' +
+      (c.link ? '<a class="out" href="' + c.link[1] + '" target="_blank" rel="noopener">' + esc(c.link[0]) + '</a>' : "") + '</article>';
+  }).join("");
+
+  // reels: counts per brand and per role, computed from the list
+  var total = VIDEOS.length, byBrand = {}, roles = { Scripted: 0, Shot: 0, Edited: 0 };
+  VIDEOS.forEach(function (v) { byBrand[v[0]] = (byBrand[v[0]] || 0) + 1; v[1].split(" · ").forEach(function (r) { if (roles[r] !== undefined) roles[r]++; }); });
+  var brands = Object.keys(byBrand).map(function (b) { return [b, byBrand[b]]; }).sort(function (a, b) { return b[1] - a[1] || a[0].localeCompare(b[0]); });
+  var allThree = VIDEOS.filter(function (v) { return v[1] === "Scripted · Shot · Edited"; }).length;
+  $("reelKpis").innerHTML = kpiHTML([[String(total), "Reels in the portfolio"], [String(brands.length), "Brands and creators"], [String(allThree), "Made end to end: scripted, shot and edited"]]);
+
+  function rowsHTML(list, max, unitFn) {
+    return '<ul class="rows">' + list.map(function (r) {
+      var pct = Math.max(2, Math.round(r[1] / max * 100));
+      return '<li class="row" tabindex="0" data-tip="' + esc(unitFn(r)) + '" aria-label="' + esc(unitFn(r)) + '"><span class="nm">' + esc(r[0]) + '</span><span class="track"><span class="fill" style="width:' + pct + '%;display:block"></span></span><span class="val">' + r[1] + '</span></li>';
+    }).join("") + '</ul>';
+  }
+  $("roleChart").innerHTML = '<h4>What I did on each reel</h4><p class="sub">Out of ' + total + ' reels. A reel can count in more than one row.</p>' +
+    rowsHTML([["Edited", roles.Edited], ["Shot", roles.Shot], ["Scripted", roles.Scripted]], total, function (r) { return r[0] + ": " + r[1] + " of " + total + " reels (" + Math.round(r[1] / total * 100) + "%)"; });
+  $("brandChart").innerHTML = '<h4>Reels per brand</h4><p class="sub">' + brands.length + ' brands and creators, most reels first.</p>' +
+    rowsHTML(brands, brands[0][1], function (r) { return r[0] + ": " + r[1] + (r[1] === 1 ? " reel" : " reels") + " (" + Math.round(r[1] / total * 100) + "% of " + total + ")"; });
+
+  $("sitesTbl").tBodies[0].innerHTML = SITES.map(function (s) { return '<tr><td><b>' + esc(s[0]) + '</b></td><td>' + esc(s[1]) + '</td><td>' + s[2].map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</td></tr>'; }).join("");
+  $("expTbl").tBodies[0].innerHTML = EXP.map(function (e) { return '<tr><td class="mono">' + esc(e[0]) + '</td><td><b>' + esc(e[1]) + '</b><div class="small">' + esc(e[2]) + '</div><div style="margin-top:6px">' + esc(e[3]) + '</div></td><td class="q">' + esc(e[4]) + '</td></tr>'; }).join("");
+  $("skillTbl").tBodies[0].innerHTML = SKILLS.map(function (s) { return '<tr><td><b>' + esc(s[0]) + '</b></td><td>' + esc(s[1]) + '</td><td>' + s[2].map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</td></tr>'; }).join("");
+  $("toolTbl").tBodies[0].innerHTML = TOOLS.map(function (t) { return '<tr><td class="mono">' + esc(t[0]) + '</td><td><b>' + esc(t[1]) + '</b></td></tr>'; }).join("");
+  $("logos").innerHTML = LOGOS.map(function (l) { return '<div><img src="../img/lg-' + l[0] + '.png" alt="' + esc(l[1]) + '" loading="lazy"></div>'; }).join("");
+
+  /* hover tooltip for the bars */
+  var tip = $("tip");
+  function showTip(el, x, y) { tip.textContent = el.getAttribute("data-tip"); tip.classList.add("on"); var w = tip.offsetWidth; tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, x - w / 2)) + "px"; tip.style.top = Math.max(8, y - 44) + "px"; }
+  document.addEventListener("mousemove", function (e) { var r = e.target.closest && e.target.closest(".row"); if (r) showTip(r, e.clientX, e.clientY); else tip.classList.remove("on"); });
+  document.addEventListener("focusin", function (e) { var r = e.target.closest && e.target.closest(".row"); if (r) { var b = r.getBoundingClientRect(); showTip(r, b.left + b.width / 2, b.top); } });
+  document.addEventListener("focusout", function () { tip.classList.remove("on"); });
+  addEventListener("scroll", function () { tip.classList.remove("on"); }, { passive: true });
+
+  /* highlight the current section in the side contents */
+  if ("IntersectionObserver" in window) {
+    var links = document.querySelectorAll(".side a");
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("data-sec") === en.target.id); }); } }); }, { rootMargin: "-40% 0px -55% 0px" });
+    SECS.forEach(function (s) { var el = $(s[0]); if (el) io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

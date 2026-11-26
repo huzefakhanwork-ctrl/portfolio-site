@@ -2,7 +2,7 @@
    1. "Sharing my story" video plays full screen (intro.mp4).
    2. It ends on black; the black opens up pixel by pixel (same stepped pixel move as the end of
       the video) onto the pill clip (pills-clip.mp4), which plays once with sound and stops on its last frame.
-   3. Blue pill -> the 3D world (APP.startWorld). Red pill -> coming soon (nothing yet).
+   3. Blue pill -> the 3D world, the right brain (APP.startWorld). Red pill -> left/, the left brain (case studies).
    Plain ES5 on purpose (old iPhones). If anything here fails, the site starts normally. */
 (function () {
   "use strict";
@@ -58,12 +58,9 @@
     "#pill .p-choice b{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800}",
     "#pill .p-choice b i{width:22px;height:11px;border-radius:6px;background:var(--c);box-shadow:inset 0 2px 0 rgba(255,255,255,.45)}",
     "#pill .p-choice span{font-size:14px;color:#5f564c}",
-    "#pill .p-choice.soon{opacity:.82}",
     "#pill.narrow .p-choice{bottom:max(18px,env(safe-area-inset-bottom,0px));width:calc(50% - 22px);top:auto!important;transform:none}",
     "#pill.narrow .p-choice:hover{transform:translateY(-2px)}",
     "#pill.narrow .p-choice.l{left:16px!important}#pill.narrow .p-choice.r{left:auto!important;right:16px}",
-    "#pill .p-toast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);background:rgba(20,20,20,.88);color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 20px;font-size:15px;opacity:0;transition:opacity .25s ease,transform .25s ease;pointer-events:none;text-align:center}",
-    "#pill .p-toast.on{opacity:1;transform:translate(-50%,-50%) scale(1)}",
     "#pill .p-again{position:absolute;right:max(8px,env(safe-area-inset-right,0px));top:max(10px,env(safe-area-inset-top,0px));border:0;background:none;font:500 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#b9b2a7;cursor:pointer;padding:8px}",
     "#pill .p-btn{position:absolute;border:0;border-radius:999px;padding:10px 16px;font:600 14px Figtree,system-ui,sans-serif;cursor:pointer;background:rgba(255,255,255,.14);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
     "#pill .p-btn:hover{background:rgba(255,255,255,.24)}",
@@ -86,11 +83,10 @@
     '<canvas id="pCv" aria-hidden="true"></canvas>' +
     '<div class="p-ui" id="pUi">' +
       '<div class="p-head" id="pHead"><div class="p-kick">Huzefa Khan · Creative strategist</div><h1 class="p-title">Choose your version.</h1><p class="p-sub">Take a pill.</p></div>' +
-      '<button class="p-dot" id="pDotR" type="button" style="--c:' + RED + '" aria-label="Red pill: coming soon"></button>' +
+      '<button class="p-dot" id="pDotR" type="button" style="--c:' + RED + '" aria-label="Red pill: the left brain, my work as case studies and data"></button>' +
       '<button class="p-dot" id="pDotB" type="button" style="--c:' + BLUE + '" aria-label="Blue pill: walk through my 3D world"></button>' +
-      '<button class="p-choice l soon" id="pChR" type="button" style="--c:' + RED + '"><b><i></i>Red pill</b><span>Coming soon</span></button>' +
-      '<button class="p-choice r" id="pChB" type="button" style="--c:' + BLUE + '"><b><i></i>Blue pill</b><span>Walk through my 3D world</span></button>' +
-      '<div class="p-toast" id="pToast" role="status">The red pill is coming soon.<br>Take the blue one for now.</div>' +
+      '<button class="p-choice l" id="pChR" type="button" style="--c:' + RED + '"><b><i></i>Red pill</b><span>Left brain: case studies &amp; data</span></button>' +
+      '<button class="p-choice r" id="pChB" type="button" style="--c:' + BLUE + '"><b><i></i>Blue pill</b><span>Right brain: walk my 3D world</span></button>' +
       '<button class="p-again" id="pAgain" type="button">↺ Watch the video</button>' +
     '</div>' +
     '<button class="p-btn p-skip" id="pSkip" type="button">Skip intro →</button>' +
@@ -265,11 +261,13 @@
       if (done) { ctx.fillRect(0, 0, W, H); setTimeout(toScene, 120); } else raf(f);
     })();
   }
-  var toastT = 0;
-  function redPill() { // nothing behind the red pill yet
-    if (stage !== "choose") return;
-    var t = $("pToast"); t.classList.add("on"); clearTimeout(toastT);
-    toastT = setTimeout(function () { t.classList.remove("on"); }, 2200);
+  function redPill(from) { // the left brain: a separate case-study page
+    if (stage !== "choose") return; stage = "leaving";
+    var p = pt(PILL_R);
+    var fx = from && from.clientX ? from.clientX : p[0], fy = from && from.clientY ? from.clientY : p[1];
+    ui.classList.remove("on"); sndBtn.hidden = true;
+    try { clip.pause(); } catch (e) {}
+    closeIn(fx, fy, function () { location.href = "left/"; }, function () {});
   }
   function bluePill(from) {
     if (stage !== "choose") return; stage = "leaving";
@@ -286,8 +284,8 @@
   }
   window.PILL.blue = bluePill;
 
-  $("pDotR").onclick = redPill;
-  $("pChR").onclick = redPill;
+  $("pDotR").onclick = function (e) { redPill(e); };
+  $("pChR").onclick = function (e) { redPill(e); };
   $("pDotB").onclick = function (e) { bluePill(e); };
   $("pChB").onclick = function (e) { bluePill(e); };
   $("pAgain").onclick = function () {
