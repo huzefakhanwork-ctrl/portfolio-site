@@ -286,7 +286,7 @@ html.pages #pages{display:flex;flex-direction:column;gap:22px;max-width:920px;ma
 
 
 <script>document.documentElement.classList.add("booting")</script>
-<script src="intro.js"></script>
+<script src="intro.js?v=2"></script>
 <canvas id="world" aria-label="A small 3D world with four cities. Use the city bar at the bottom to travel."></canvas>
 <div class="layer" id="chips"></div>
 <div class="layer" id="marks"></div>
@@ -294,6 +294,7 @@ html.pages #pages{display:flex;flex-direction:column;gap:22px;max-width:920px;ma
 <div class="top name pill">Huzefa Khan<span>Creative strategist · Bangalore</span></div>
 <div class="top tr">
   <button class="pill sq" id="snd" type="button" aria-label="Turn sound on" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="sndWave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" style="display:none"/><path id="sndX" d="m16 9 6 6m0-6-6 6"/></svg></button>
+  <button class="pill contact-btn" id="pillsBtn" type="button" aria-label="Back to the pill choice" onclick="location.href=location.pathname+'?pills=1'">← Pills</button>
   <button class="pill contact-btn" id="contactBtn" type="button">Contact</button>
 </div>
 

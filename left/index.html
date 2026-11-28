@@ -76,6 +76,11 @@ img{max-width:100%;display:block}
 
 /* printed photos */
 .print{position:relative;margin:0 0 14px;background:#d9d3c4}
+.illus{margin:0 0 14px;border:1px solid var(--rule);background:#8a7a6a;overflow:hidden}
+.illus img{width:100%;height:auto;display:block}
+.illus.band img{aspect-ratio:21/9;object-fit:cover;object-position:50% 40%}
+@media (max-width:700px){.illus.band img{aspect-ratio:3/2}}
+.sect + .illus.band{margin-top:18px}
 .print img{width:100%;filter:grayscale(1) contrast(1.15) brightness(1.02);mix-blend-mode:multiply}
 .print.wide img{aspect-ratio:16/10;object-fit:cover;object-position:50% 22%}
 .print::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(22,21,19,.22) 1px,transparent 1.2px);background-size:4px 4px;mix-blend-mode:multiply}
@@ -193,9 +198,9 @@ img{max-width:100%;display:block}
 <div class="page">
 
   <div class="strip">
-    <a href="../">← Back to the pills</a>
+    <a href="../?pills=1">← Back to the pills</a>
     <span>The red pill edition</span>
-    <a href="../#origin">Take the blue pill <span class="pd" style="background:var(--blue)"></span></a>
+    <a href="../?pill=blue#origin">Take the blue pill <span class="pd" style="background:var(--blue)"></span></a>
   </div>
 
   <header class="plate">
@@ -217,7 +222,7 @@ img{max-width:100%;display:block}
       <h2 class="hl">Bangalore strategist closes the gap between <em>thinking and making.</em></h2>
       <p class="dek">Traded at 17, sold laptops at 18, led 80+ students, launched a brand, then built two agencies. Our reporter followed the numbers.</p>
       <div class="byline">By the Left Brain · Filed from Bangalore</div>
-      <figure class="print wide" style="margin:0 0 14px"><img src="../img/me.jpg" alt="Huzefa Khan" loading="eager"></figure>
+      <figure class="illus"><img src="../img/ledger-lead.jpg" alt="Illustrated portrait of Huzefa Khan in a straw hat and sunglasses, smiling" width="1586" height="992" loading="eager"></figure>
       <p class="cap">Huzefa Khan, creative strategist. Brand strategy, content and agency work.</p>
       <div class="cols2">
         <p class="drop">At 17, Huzefa Khan started trading, not to chase money but to understand decisions. A year later, selling laptops at Croma taught him that people buy trust before they buy products.</p>
@@ -236,8 +241,8 @@ img{max-width:100%;display:block}
           <b>Open to</b><span>Brand strategy, content and agency work, anywhere</span>
         </div>
       </div>
-      <figure class="print"><img src="../img/lead-team.jpg" alt="College team with trophies" loading="lazy"></figure>
-      <p class="cap">The college organizing team. Most Valuable Asset of the Year and Best Leader.</p>
+      <figure class="illus"><img src="../img/ledger-side.jpg" alt="Illustration of Huzefa Khan in a yellow raincoat, looking up" width="900" height="1125" loading="lazy"></figure>
+      <p class="cap">Always looking for the next question.</p>
     </aside>
   </div>
 
@@ -247,14 +252,20 @@ img{max-width:100%;display:block}
 
   <!-- case studies -->
   <div class="sect" id="business"><h2>Business</h2><span>Six decisions, written down · Problem, approach, result</span></div>
+  <figure class="illus band"><img src="../img/ledger-agency.jpg" alt="Illustration of Huzefa Khan explaining an idea with a marker in hand" width="1264" height="692" loading="lazy"></figure>
+  <p class="cap">Every project starts as a question.</p>
   <div class="articles" id="articles"></div>
 
   <!-- websites -->
   <div class="sect" id="listings"><h2>Listings</h2><span>Six websites · Framer &amp; Shopify</span></div>
+  <figure class="illus band"><img src="../img/ledger-hands.jpg" alt="Illustration of hands typing on a laptop, with a beaded bracelet and a watch" width="1264" height="692" loading="lazy"></figure>
+  <p class="cap">Built on Framer and Shopify.</p>
   <table class="tbl stack" id="sites"><thead><tr><th>Property</th><th>Description</th><th>Type</th></tr></thead><tbody></tbody></table>
 
   <!-- timeline -->
   <div class="sect" id="archive"><h2>The Archive</h2><span>2021 to now</span></div>
+  <figure class="illus band"><img src="../img/ledger-camera.jpg" alt="Illustration of Huzefa Khan looking through a cinema camera" width="1264" height="692" loading="lazy"></figure>
+  <p class="cap">From trading charts to camera rigs.</p>
   <table class="tbl stack" id="exp"><thead><tr><th>Year</th><th>Story</th><th>What he learned</th></tr></thead><tbody></tbody></table>
 
   <!-- skills + tools -->
@@ -272,7 +283,7 @@ img{max-width:100%;display:block}
     <div>
       <p class="kicker">Also in print</p>
       <p style="font:italic 700 22px/1.3 var(--head);margin:0 0 10px">This was the left brain. The right brain is a small 3D world of the same story.</p>
-      <div class="btns"><a class="btn" href="../#origin"><span class="pd" style="background:var(--blue)"></span>Take the blue pill</a><a class="btn" href="../">Back to the pills</a></div>
+      <div class="btns"><a class="btn" href="../?pill=blue#origin"><span class="pd" style="background:var(--blue)"></span>Take the blue pill</a><a class="btn" href="../?pills=1">Back to the pills</a></div>
     </div>
   </div>
   <div class="colophon"><span>The Left Brain Ledger · Vol. I</span><span>Printed in Bangalore</span><span>© Huzefa Khan</span></div>

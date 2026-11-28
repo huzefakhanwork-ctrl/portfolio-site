@@ -7,13 +7,16 @@
 (function () {
   "use strict";
   var html = document.documentElement;
-  // Shared links to a city (#origin, #reel-city ...) skip the intro and go straight in.
-  var hash = location.hash.replace("#", "");
-  if (hash && hash !== "intro") { window.PILL = { active: false }; return; }
+  // Every full load (including a reload) starts with the intro video. Two in-site shortcuts:
+  //   ?pills=1   -> straight to the pill choice ("Back to the pills" buttons)
+  //   ?pill=blue -> straight into the 3D world ("Take the blue pill" on the left-brain page)
+  // They are removed from the address bar at once, so a reload plays the intro again.
+  var q = location.search, toPills = /[?&]pills=1(&|$)/.test(q), toBlue = /[?&]pill=blue(&|$)/.test(q);
+  if (q) { try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) {} }
+  if (toBlue) { window.PILL = { active: false }; return; }
 
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var seen = false; try { seen = localStorage.getItem("hk-pill-seen") === "1"; } catch (e) {}
-  if (hash === "intro") seen = false;
+  var seen = toPills;
 
   var RED = "#e3342b", BLUE = "#2f7fe6", SCENE_BG = "#141414";
   // Where the pills sit in the clip (fraction of frame width/height; they barely move).
@@ -215,7 +218,6 @@
   var stage = "video";
   function toScene() {
     if (stage !== "video") return; stage = "opening";
-    try { localStorage.setItem("hk-pill-seen", "1"); } catch (e) {}
     try { vid.pause(); } catch (e) {}
     skipBtn.hidden = sndBtn.hidden = playBtn.hidden = true;
     // cover the screen in black, put the pill clip underneath, then open up onto it
